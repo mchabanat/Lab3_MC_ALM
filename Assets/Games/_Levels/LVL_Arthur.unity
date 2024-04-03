@@ -314,7 +314,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7112018452228977987, guid: 5c50f8389c2534d469cfd6e663292b05, type: 3}
       propertyPath: isBouncy
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7112018452228977987, guid: 5c50f8389c2534d469cfd6e663292b05, type: 3}
       propertyPath: isExplosive

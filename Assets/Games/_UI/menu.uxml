@@ -1,0 +1,11 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/Games/_UI/USS/menu.uss?fileID=7433441132597879392&amp;guid=2fac18ef9f2c13549903aaac39c5a461&amp;type=3#menu" />
+    <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); justify-content: center; align-items: center;">
+        <ui:VisualElement name="Container" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); width: 70%; height: 30%; justify-content: center; align-items: center;">
+            <ui:Label tabindex="-1" text="TITRE DU JEU" display-tooltip-when-elided="true" name="Title" style="margin-bottom: 40px; font-size: 50px; -unity-font-style: bold;" />
+            <ui:Button text="PLAY" display-tooltip-when-elided="true" name="buttonPlay" class="button" />
+            <ui:Button text="SETTINGS" display-tooltip-when-elided="true" name="buttonSettings" class="button" />
+            <ui:Button text="QUIT" display-tooltip-when-elided="true" name="buttonQuit" class="button" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
