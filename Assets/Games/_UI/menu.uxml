@@ -1,16 +1,32 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
     <Style src="project://database/Assets/Games/_UI/USS/menu.uss?fileID=7433441132597879392&amp;guid=2fac18ef9f2c13549903aaac39c5a461&amp;type=3#menu" />
     <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); justify-content: center; align-items: center;">
-        <ui:VisualElement name="ContainerMenu" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); width: 70%; height: 30%; justify-content: center; align-items: center; opacity: 1; display: none; visibility: hidden; position: relative; overflow: hidden;">
-            <ui:Label tabindex="-1" text="CHAD SHOOTER" display-tooltip-when-elided="true" name="Title" style="margin-bottom: 40px; font-size: 50px; -unity-font-style: bold;" />
+        <ui:VisualElement name="ContainerMenu" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); width: 70%; height: 30%; justify-content: center; align-items: center; opacity: 1; display: none; visibility: visible; position: relative; overflow: visible;">
+            <ui:Label tabindex="-1" text="CHAD SHOOTER" display-tooltip-when-elided="true" name="Title" style="margin-bottom: 40px; font-size: 50px; -unity-font-style: bold; visibility: visible;" />
             <ui:Button text="PLAY" display-tooltip-when-elided="true" name="buttonPlay" class="button" />
             <ui:Button text="SETTINGS" display-tooltip-when-elided="true" name="buttonSettings" class="button" />
             <ui:Button text="QUIT" display-tooltip-when-elided="true" name="buttonQuit" class="button" />
         </ui:VisualElement>
         <ui:VisualElement name="ContainerSettings" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); width: 70%; height: 30%; justify-content: flex-start; align-items: center; opacity: 1; display: flex; visibility: visible; position: relative; overflow: visible;">
-            <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); width: 100%; height: 35px; position: relative; flex-direction: row; justify-content: space-between; align-items: flex-start; align-self: auto; text-overflow: clip;">
-                <ui:Label tabindex="-1" text="&lt; Back to menu" display-tooltip-when-elided="true" enable-rich-text="true" style="font-size: 12px; -unity-font-style: bold;" />
-                <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);" />
+            <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); width: 100%; height: 35px; position: relative; flex-direction: column; justify-content: space-between; align-items: flex-start; align-self: auto; text-overflow: clip;">
+                <ui:VisualElement name="TitleContainer" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); height: 20%; justify-content: center; width: 100%;">
+                    <ui:Label tabindex="-1" text="SETTINGS" display-tooltip-when-elided="true" style="justify-content: flex-start; align-self: auto; align-items: auto; -unity-text-align: upper-center; font-size: 34px; -unity-font-style: bold;" />
+                </ui:VisualElement>
+                <ui:VisualElement name="SettingsContainer" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); height: 80%; justify-content: flex-start; width: 100%;">
+                    <ui:VisualElement name="screenMode" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); height: 10%; width: 100%; position: relative; justify-content: center; align-items: stretch;">
+                        <ui:DropdownField label="Screen Mode" index="-1" choices="System.Collections.Generic.List`1[System.String]" name="dropDownScreenMode" />
+                    </ui:VisualElement>
+                    <ui:VisualElement name="screenSize" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); height: 10%; width: 100%; position: relative; justify-content: center; align-items: stretch;">
+                        <ui:DropdownField label="Screen Size" index="-1" name="dropDownScreenSize" />
+                    </ui:VisualElement>
+                    <ui:VisualElement name="volumeSlider" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); height: 10%; width: 100%; position: relative; justify-content: center; align-items: stretch;">
+                        <ui:Slider picking-mode="Ignore" label="Volume&#10;" value="42" high-value="100" name="volumeSlider" />
+                    </ui:VisualElement>
+                    <ui:VisualElement name="ButtonsContainer" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); height: 10%; width: 100%; position: relative; justify-content: center; align-items: stretch; flex-direction: row;">
+                        <ui:Button text="Apply" display-tooltip-when-elided="true" name="applyButton" class="buttonSettings" />
+                        <ui:Button text="Menu" display-tooltip-when-elided="true" name="menuButton" class="buttonSettings" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>

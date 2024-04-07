@@ -49,3 +49,31 @@
     transition-duration: 0.5s;
     transition-timing-function: ease-in-out;
 }
+
+.buttonSettings {
+    width: 30%;
+    height: 50%;
+    -unity-text-align: middle-center;
+    font-size: 26px;
+    -unity-font-style: normal;
+    letter-spacing: 2px;
+    background-color: rgba(255, 255, 255, 0.15);
+    transition-property: all, background-color;
+    transition-duration: 0s, 0.5s;
+    transition-timing-function: ease, ease-in-out;
+    transition-delay: 0s, 0s;
+}
+
+.buttonSettings:hover {
+    width: 30%;
+    height: 50%;
+    -unity-text-align: middle-center;
+    font-size: 26px;
+    -unity-font-style: normal;
+    letter-spacing: 2px;
+    background-color: rgba(255, 255, 255, 0.82);
+    transition-property: all, background-color;
+    transition-duration: 0s, 0.5s;
+    transition-timing-function: ease, ease-in-out;
+    transition-delay: 0s, 0s;
+}
