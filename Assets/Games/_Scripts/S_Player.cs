@@ -20,13 +20,18 @@ public class S_Player : MonoBehaviour
     [Header("Ground Check")]
     [SerializeField] private float _playerHeight;
     [SerializeField] private LayerMask _whatIsGround;
-    [SerializeField] private bool _isGrounded = false;
+    private bool _isGrounded = false;
 
     [Header("Jump")]
     [SerializeField] private float _jumpForce = 5f;
     [SerializeField] private float _jumpCooldown;
     [SerializeField] private float _airMultiplier;
-    [SerializeField] private bool _readyToJump = true;
+    private bool _readyToJump = true;
+    private float _jumpCounter = 0f;
+    private bool _isFlying = false;
+    private bool _spacePressed = false;
+    private bool _shiftPressed = false;
+    [SerializeField] private float _flyForce = 10f;
 
 
     //Look
@@ -62,6 +67,8 @@ public class S_Player : MonoBehaviour
         //Jump
         _inputs.Player.Jump.performed += OnJumpPerformed;
         _inputs.Player.Jump.canceled += OnJumpCancelled;
+        _inputs.Player.FlyDown.performed += OnFlyDownPerformed;
+        _inputs.Player.FlyDown.canceled += OnFlyDownCancelled;
 
         //Look
         _inputs.Player.Look.performed += OnLookPerformed;
@@ -78,6 +85,8 @@ public class S_Player : MonoBehaviour
         //Jump
         _inputs.Player.Jump.performed -= OnJumpPerformed;
         _inputs.Player.Jump.canceled -= OnJumpCancelled;
+        _inputs.Player.FlyDown.performed -= OnFlyDownPerformed;
+        _inputs.Player.FlyDown.canceled -= OnFlyDownCancelled;
 
         //Look
         _inputs.Player.Look.performed -= OnLookPerformed;
@@ -88,6 +97,8 @@ public class S_Player : MonoBehaviour
     {
         PlayerMove();
         PlayerMouseLook();
+        SpaceKeyAction();
+        ShiftKeyAction();
     }
 
     private void Update()
@@ -100,13 +111,25 @@ public class S_Player : MonoBehaviour
         {
             _rb.drag = _groundDrag;
             _readyToJump = true;
+            _isFlying = false;
         }
         else
         {
             _rb.drag = 0f;
         }
+
+        // Flying
+        if (_isFlying)
+        {
+            _rb.useGravity = false;
+        }
+        else
+        {
+            _rb.useGravity = true;
+        }
     }
 
+    // Movement
     private void OnMovementPerformed(InputAction.CallbackContext value)
     {
         _moveDir = value.ReadValue<Vector2>();
@@ -134,23 +157,111 @@ public class S_Player : MonoBehaviour
     // Jump
     private void OnJumpPerformed(InputAction.CallbackContext value)
     {
-        if (_readyToJump && _isGrounded)
-        {
-            PlayerJump();
-            _readyToJump = false;
-        }
+        _spacePressed = IsSpaceKeyHeld();
+
+        DoubleJumpCheck(); 
     }
 
     private void OnJumpCancelled(InputAction.CallbackContext value)
     {
+        _spacePressed = IsSpaceKeyHeld();
 
+        if (_isFlying)
+        {
+            StopMovement();
+        }
+    }
+    private void OnFlyDownPerformed(InputAction.CallbackContext value)
+    {
+        _shiftPressed = IsShiftKeyHeld();
     }
 
-    private void PlayerJump()
+    private void OnFlyDownCancelled(InputAction.CallbackContext value)
+    {
+        _shiftPressed = IsShiftKeyHeld();
+
+        if (_isFlying)
+        {
+            StopMovement();
+        }
+    }
+
+    private void SpaceKeyAction()
+    {
+        if (_spacePressed)
+        {
+            if (!_isFlying)
+            {
+                if (_readyToJump && _isGrounded)
+                {
+                    ImpulsePlayer();
+                    _readyToJump = false;
+                }
+            }
+            else
+            {
+                FlyHigher();
+            }
+        }
+    }
+
+    private void ShiftKeyAction()
+    {
+        if (_shiftPressed)
+        {
+            if (_isFlying)
+            {
+                FlyDown();
+            }
+        }
+    }
+
+    private void StopMovement()
+    {
+        _rb.velocity = Vector3.zero;
+    }
+
+    private bool IsSpaceKeyHeld()
+    {
+        return _inputs.Player.Jump.ReadValue<float>() > 0.1f;
+    }
+
+    private bool IsShiftKeyHeld()
+    {
+        return _inputs.Player.FlyDown.ReadValue<float>() > 0.1f;
+    }
+
+    private void DoubleJumpCheck()
+    {
+        _jumpCounter++;
+
+        if (_jumpCounter >= 2)
+        {
+            _isFlying = !_isFlying;
+        }
+
+        Invoke("ResetJumpCounter", 0.4f);
+    }
+    private void ImpulsePlayer()
     {
         _rb.velocity = new Vector3(_rb.velocity.x, 0f, _rb.velocity.z);
 
         _rb.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
+    }
+
+    private void FlyHigher()
+    {
+        _rb.AddForce(Vector3.up * _flyForce, ForceMode.Force);
+    }
+
+    private void FlyDown()
+    {
+        _rb.AddForce(Vector3.down * _flyForce, ForceMode.Force);
+    }
+
+    private void ResetJumpCounter()
+    {
+        _jumpCounter = 0f;
     }
 
     //Look

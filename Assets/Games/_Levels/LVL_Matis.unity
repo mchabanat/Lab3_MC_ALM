@@ -152,7 +152,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 48107756}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 10
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -278,11 +278,10 @@ MonoBehaviour:
   _whatIsGround:
     serializedVersion: 2
     m_Bits: 1024
-  _isGrounded: 0
-  _jumpForce: 5
+  _jumpForce: 50
   _jumpCooldown: 0.25
   _airMultiplier: 0.4
-  _readyToJump: 1
+  _flyForce: 50
   _cam: {fileID: 431221731}
   _mouseSensitivity: 25
 --- !u!1 &105887591
