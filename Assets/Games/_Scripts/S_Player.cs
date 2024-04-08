@@ -4,15 +4,45 @@ using UnityEngine;
 
 public class S_Player : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [SerializeField] private GameObject _canvas;
+    [SerializeField] private int _lifePoints = 200;
+
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         
     }
+
+    private void UpdateCanvasLife()
+    {
+        _canvas.GetComponent<S_CanvasController>().UpdateLifeText(_lifePoints);
+    }
+
+    public void AddLifePoints(int lifePoints)
+    {
+        _lifePoints += lifePoints;
+        UpdateCanvasLife();
+    }
+
+    public void TakeDamage(int damage)
+    {
+        _lifePoints -= damage;
+        UpdateCanvasLife();
+
+        if (_lifePoints <= 0)
+        {
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        Debug.Log("Player died");
+    }
+
+    
 }
