@@ -41,6 +41,12 @@ public class S_PlayerMovement : MonoBehaviour
     private Vector2 _mouseDelta;
     private bool _isRotating = false;
 
+    // Custom event
+    [Header("Custom event")]
+    [SerializeField] private float _forwardImpulseForce = 10f;
+    private bool _impulseIsReady = true;
+    [SerializeField] private float _forwardImpulseCooldown = 5f;
+
     private void Awake()
     {
         _inputs = new IA_PlayerController();
@@ -49,11 +55,6 @@ public class S_PlayerMovement : MonoBehaviour
         
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-    }
-
-    private void Start()
-    {
-
     }
 
     private void OnEnable()
@@ -73,6 +74,10 @@ public class S_PlayerMovement : MonoBehaviour
         //Look
         _inputs.Player.Look.performed += OnLookPerformed;
         _inputs.Player.Look.canceled += OnLookCancelled;
+
+        // Custom event
+        _inputs.Player.ForwardBoost.performed += OnForwardBoostPerformed;
+        _inputs.Player.ForwardBoost.canceled += OnForwardBoostCancelled;
     }
     private void OnDisable()
     {
@@ -91,6 +96,10 @@ public class S_PlayerMovement : MonoBehaviour
         //Look
         _inputs.Player.Look.performed -= OnLookPerformed;
         _inputs.Player.Look.canceled -= OnLookCancelled;
+
+        // Custom event
+        _inputs.Player.ForwardBoost.performed -= OnForwardBoostPerformed;
+        _inputs.Player.ForwardBoost.canceled -= OnForwardBoostCancelled;
     }
 
     private void FixedUpdate()
@@ -304,4 +313,30 @@ public class S_PlayerMovement : MonoBehaviour
         _cam.transform.eulerAngles = new Vector3(desiredRotationX, _cam.transform.eulerAngles.y, 0);
     }
 
+    // Custom event : forward boost on right click
+    private void OnForwardBoostPerformed(InputAction.CallbackContext value)
+    {
+        if (_impulseIsReady)
+        {
+            ForwardImpulse();
+            _impulseIsReady = false;
+            Invoke("ResetForwardImpulse", _forwardImpulseCooldown);
+        }
+    }
+
+    private void OnForwardBoostCancelled(InputAction.CallbackContext value)
+    {
+
+    }
+
+    private void ForwardImpulse()
+    {
+        _rb.AddForce(_cam.transform.forward * _forwardImpulseForce, ForceMode.Impulse);
+        Invoke("StopMovement", .75f);
+    }
+
+    private void ResetForwardImpulse()
+    {
+        _impulseIsReady = true;
+    }
 }

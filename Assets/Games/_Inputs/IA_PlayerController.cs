@@ -62,6 +62,15 @@ public partial class @IA_PlayerController: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ForwardBoost"",
+                    ""type"": ""Button"",
+                    ""id"": ""baf81cdc-4a12-4c3c-98ae-8d15bb86d76f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -152,6 +161,17 @@ public partial class @IA_PlayerController: IInputActionCollection2, IDisposable
                     ""action"": ""FlyDown"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3fbbb9ea-b26b-45ab-9bb1-a97590d1ebe0"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ForwardBoost"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -164,6 +184,7 @@ public partial class @IA_PlayerController: IInputActionCollection2, IDisposable
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_FlyDown = m_Player.FindAction("FlyDown", throwIfNotFound: true);
+        m_Player_ForwardBoost = m_Player.FindAction("ForwardBoost", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -229,6 +250,7 @@ public partial class @IA_PlayerController: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Look;
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_FlyDown;
+    private readonly InputAction m_Player_ForwardBoost;
     public struct PlayerActions
     {
         private @IA_PlayerController m_Wrapper;
@@ -237,6 +259,7 @@ public partial class @IA_PlayerController: IInputActionCollection2, IDisposable
         public InputAction @Look => m_Wrapper.m_Player_Look;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @FlyDown => m_Wrapper.m_Player_FlyDown;
+        public InputAction @ForwardBoost => m_Wrapper.m_Player_ForwardBoost;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -258,6 +281,9 @@ public partial class @IA_PlayerController: IInputActionCollection2, IDisposable
             @FlyDown.started += instance.OnFlyDown;
             @FlyDown.performed += instance.OnFlyDown;
             @FlyDown.canceled += instance.OnFlyDown;
+            @ForwardBoost.started += instance.OnForwardBoost;
+            @ForwardBoost.performed += instance.OnForwardBoost;
+            @ForwardBoost.canceled += instance.OnForwardBoost;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -274,6 +300,9 @@ public partial class @IA_PlayerController: IInputActionCollection2, IDisposable
             @FlyDown.started -= instance.OnFlyDown;
             @FlyDown.performed -= instance.OnFlyDown;
             @FlyDown.canceled -= instance.OnFlyDown;
+            @ForwardBoost.started -= instance.OnForwardBoost;
+            @ForwardBoost.performed -= instance.OnForwardBoost;
+            @ForwardBoost.canceled -= instance.OnForwardBoost;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -297,5 +326,6 @@ public partial class @IA_PlayerController: IInputActionCollection2, IDisposable
         void OnLook(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnFlyDown(InputAction.CallbackContext context);
+        void OnForwardBoost(InputAction.CallbackContext context);
     }
 }
