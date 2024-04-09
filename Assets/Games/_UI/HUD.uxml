@@ -1,0 +1,11 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement name="cursorContainer" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); position: absolute; width: 100%; height: 100%; justify-content: center; align-self: center; align-items: center;">
+        <ui:VisualElement name="cursor" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); background-image: url(&apos;project://database/Assets/UI%20Toolkit/UnityThemes/UnityDefaultRuntimeTheme.tss?fileID=8300712400058098730&amp;guid=8eb5fb4e3a2544e48b2f35cba515b52b&amp;type=3#dropdown-arrow@2x&apos;); width: 1%; height: 1%; position: absolute;" />
+    </ui:VisualElement>
+    <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
+        <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); align-items: stretch; flex-direction: row; justify-content: space-between;">
+            <ui:Label tabindex="-1" text="100%" display-tooltip-when-elided="true" name="Health" style="-unity-font-style: bold; font-size: 27px;" />
+            <ui:Label tabindex="-1" text="Ammo : 10" display-tooltip-when-elided="true" name="Ammo" style="font-size: 27px; -unity-font-style: bold;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
