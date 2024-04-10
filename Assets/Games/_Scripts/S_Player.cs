@@ -8,20 +8,24 @@ public class S_Player : MonoBehaviour
 
     [SerializeField] private GameObject _activeGun;
     [SerializeField] private int _activeGunIndex = 0;
-    [SerializeField] private List<ScriptableObject> _guns;
+    [SerializeField] private List<GameObject> _guns;
 
     [SerializeField] private GameObject _bullet;
 
-
+    private Transform _gunTransform;
 
     void Start()
     {
-
+        _gunTransform = _activeGun.transform;
+        _activeGunIndex = 0;
     }
 
     void Update()
     {
-
+        if(Input.GetKeyDown(KeyCode.F))
+        {
+            changeGun();
+        }
     }
 
 
@@ -52,6 +56,8 @@ public class S_Player : MonoBehaviour
         {
             _activeGunIndex = 0;
         }
+        Destroy(_activeGun.gameObject);
+        _activeGun = Instantiate(_guns[_activeGunIndex], _gunTransform.position, _gunTransform.rotation);
     }
 
     public void Shoot(GameObject cam)
@@ -67,6 +73,16 @@ public class S_Player : MonoBehaviour
             Quaternion canonRotation = Quaternion.LookRotation(hitPoint - _activeGun.transform.position, hitNormal);
 
             GameObject bullet = Instantiate(_bullet, canon.transform.position, canonRotation);
+            if (_activeGun.GetComponent<S_Guns>().explosive)
+            {
+                bullet.GetComponent<S_Projectile>().setExplosive(true);
+            }
+            if(_activeGun.GetComponent<S_Guns>().bouncy)
+            {
+                bullet.GetComponent<S_Projectile>().setBouncy(true);
+            }
+
+            _activeGun.GetComponent<S_Guns>().gunFire.Play();
         }
 
     }

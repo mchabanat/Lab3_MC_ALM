@@ -7,4 +7,8 @@ public class S_Guns : MonoBehaviour
     public string gunName;
     public GameObject gunPrefab;
     public GameObject canon;
+    public ParticleSystem gunFire;
+
+    public bool explosive;
+    public bool bouncy;
 }
