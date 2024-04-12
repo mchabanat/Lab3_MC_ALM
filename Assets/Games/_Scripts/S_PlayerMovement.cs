@@ -81,6 +81,9 @@ public class S_PlayerMovement : MonoBehaviour
 
         //Shoot
         _inputs.Player.Shoot.performed += OnShootPerformed;
+
+        //SwitchGun
+        _inputs.Player.SwitchWeapon.performed += OnSwitchGunPerformed;
     }
     private void OnDisable()
     {
@@ -106,6 +109,9 @@ public class S_PlayerMovement : MonoBehaviour
 
         //Shoot
         _inputs.Player.Shoot.performed -= OnShootPerformed;
+
+        //SwitchGun
+        _inputs.Player.SwitchWeapon.performed -= OnSwitchGunPerformed;
     }
 
     private void FixedUpdate()
@@ -349,5 +355,10 @@ public class S_PlayerMovement : MonoBehaviour
     private void OnShootPerformed(InputAction.CallbackContext value)
     {
         GetComponent<S_Player>().Shoot(_cam);
+    }
+
+    private void OnSwitchGunPerformed(InputAction.CallbackContext value)
+    {
+        GetComponent<S_Player>().changeGun();
     }
 }

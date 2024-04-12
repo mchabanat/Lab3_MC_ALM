@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class S_Player : MonoBehaviour
 {
-    [SerializeField] private int _lifePoints = 200;
 
     [SerializeField] private GameObject _activeGun;
     [SerializeField] private int _activeGunIndex = 0;
@@ -14,33 +13,22 @@ public class S_Player : MonoBehaviour
 
     [SerializeField] private GameObject _gunTransform;
 
+    [SerializeField] private int ammo = 32;
+
+    [SerializeField] private GameObject _HUD;
+
+    [SerializeField] private int _maxHealth = 100;
+    private int _currentHealth;
     void Start()
     {
         _activeGunIndex = 0;
+        _currentHealth = _maxHealth;
+        _HUD.GetComponent<S_HUD>().UpdateAmmo(ammo);
+        _HUD.GetComponent<S_HUD>().UpdateHealth(_currentHealth);
     }
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.F))
-        {
-            changeGun();
-        }
-    }
-
-
-    public void AddLifePoints(int lifePoints)
-    {
-        _lifePoints += lifePoints;
-    }
-
-    public void TakeDamage(int damage)
-    {
-        _lifePoints -= damage;
-
-        if (_lifePoints <= 0)
-        {
-            Die();
-        }
     }
 
     private void Die()
@@ -62,6 +50,12 @@ public class S_Player : MonoBehaviour
 
     public void Shoot(GameObject cam)
     {
+        if (ammo <= 0)
+        {
+            return;
+        }
+
+
         GameObject canon = _activeGun.GetComponent<S_Guns>().canon;
         Ray ray = new Ray(cam.transform.position, cam.transform.forward);
         RaycastHit hit;
@@ -77,14 +71,32 @@ public class S_Player : MonoBehaviour
             {
                 bullet.GetComponent<S_Projectile>().setExplosive(true);
             }
-            if(_activeGun.GetComponent<S_Guns>().bouncy)
+            if (_activeGun.GetComponent<S_Guns>().bouncy)
             {
                 bullet.GetComponent<S_Projectile>().setBouncy(true);
             }
 
             _activeGun.GetComponent<S_Guns>().gunFire.Play();
-        }
 
+            ammo--;
+            _HUD.GetComponent<S_HUD>().UpdateAmmo(ammo);
+        }
+    }
+
+    public void AddAmmo(int ammo)
+    {
+        this.ammo += ammo;
+        _HUD.GetComponent<S_HUD>().UpdateAmmo(ammo);
+    }
+
+    public void takeDamage(int damage)
+    {
+        _currentHealth -= damage;
+        _HUD.GetComponent<S_HUD>().UpdateHealth(_currentHealth);
+        if (_currentHealth <= 0)
+        {
+            Die();
+        }
     }
 
 }
