@@ -12,11 +12,10 @@ public class S_Player : MonoBehaviour
 
     [SerializeField] private GameObject _bullet;
 
-    private Transform _gunTransform;
+    [SerializeField] private GameObject _gunTransform;
 
     void Start()
     {
-        _gunTransform = _activeGun.transform;
         _activeGunIndex = 0;
     }
 
@@ -57,7 +56,8 @@ public class S_Player : MonoBehaviour
             _activeGunIndex = 0;
         }
         Destroy(_activeGun.gameObject);
-        _activeGun = Instantiate(_guns[_activeGunIndex], _gunTransform.position, _gunTransform.rotation);
+        _activeGun = Instantiate(_guns[_activeGunIndex], _gunTransform.transform.position, _gunTransform.transform.rotation);
+        _activeGun.transform.parent = _gunTransform.transform;
     }
 
     public void Shoot(GameObject cam)
