@@ -35,14 +35,12 @@ public class S_Player : MonoBehaviour
 
         if (_lifePoints <= 0)
         {
-            Die();
+            GameOver();
         }
     }
 
-    private void Die()
+    private void GameOver()
     {
         Debug.Log("Player died");
     }
-
-    
 }
