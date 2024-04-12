@@ -25,7 +25,13 @@ public class S_Projectile : MonoBehaviour
         {
             trail.startColor = Color.red;
             trail.endColor = Color.yellow;
-            force = force/2;
+            force = force / 2;
+        }
+        if (isBouncy)
+        {
+            trail.startColor = Color.green;
+            trail.endColor = Color.yellow;
+            force = force / 2;
         }
 
         rb.AddForce(transform.forward * force, ForceMode.Impulse);
@@ -54,5 +60,15 @@ public class S_Projectile : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    public void setExplosive(bool explosive)
+    {
+        isExplosive = explosive;
+    }
+
+    public void setBouncy(bool bouncy)
+    {
+        isBouncy = bouncy;
     }
 }

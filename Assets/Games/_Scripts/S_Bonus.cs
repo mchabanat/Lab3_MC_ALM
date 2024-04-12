@@ -6,6 +6,8 @@ public class S_Bonus : MonoBehaviour
 {
     [SerializeField] private float rotSpeed = 10.0f;
 
+    [SerializeField] private int ammo = 10;
+
     void Start()
     {
 
@@ -20,5 +22,14 @@ public class S_Bonus : MonoBehaviour
     private void rotateBonus()
     {
         transform.Rotate(Vector3.up, rotSpeed * Time.deltaTime);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "Player")
+        {
+            other.GetComponent<S_Player>().AddAmmo(ammo);
+            Destroy(gameObject);
+        }
     }
 }

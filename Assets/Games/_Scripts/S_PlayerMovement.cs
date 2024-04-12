@@ -52,7 +52,7 @@ public class S_PlayerMovement : MonoBehaviour
         _inputs = new IA_PlayerController();
 
         _rb = GetComponent<Rigidbody>();
-        
+
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
@@ -78,6 +78,12 @@ public class S_PlayerMovement : MonoBehaviour
         // Custom event
         _inputs.Player.ForwardBoost.performed += OnForwardBoostPerformed;
         _inputs.Player.ForwardBoost.canceled += OnForwardBoostCancelled;
+
+        //Shoot
+        _inputs.Player.Shoot.performed += OnShootPerformed;
+
+        //SwitchGun
+        _inputs.Player.SwitchWeapon.performed += OnSwitchGunPerformed;
     }
     private void OnDisable()
     {
@@ -100,6 +106,12 @@ public class S_PlayerMovement : MonoBehaviour
         // Custom event
         _inputs.Player.ForwardBoost.performed -= OnForwardBoostPerformed;
         _inputs.Player.ForwardBoost.canceled -= OnForwardBoostCancelled;
+
+        //Shoot
+        _inputs.Player.Shoot.performed -= OnShootPerformed;
+
+        //SwitchGun
+        _inputs.Player.SwitchWeapon.performed -= OnSwitchGunPerformed;
     }
 
     private void FixedUpdate()
@@ -168,7 +180,7 @@ public class S_PlayerMovement : MonoBehaviour
     {
         _spacePressed = IsSpaceKeyHeld();
 
-        DoubleJumpCheck(); 
+        DoubleJumpCheck();
     }
 
     private void OnJumpCancelled(InputAction.CallbackContext value)
@@ -338,5 +350,15 @@ public class S_PlayerMovement : MonoBehaviour
     private void ResetForwardImpulse()
     {
         _impulseIsReady = true;
+    }
+
+    private void OnShootPerformed(InputAction.CallbackContext value)
+    {
+        GetComponent<S_Player>().Shoot(_cam);
+    }
+
+    private void OnSwitchGunPerformed(InputAction.CallbackContext value)
+    {
+        GetComponent<S_Player>().changeGun();
     }
 }

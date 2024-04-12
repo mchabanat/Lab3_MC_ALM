@@ -77,3 +77,11 @@
     transition-timing-function: ease, ease-in-out;
     transition-delay: 0s, 0s;
 }
+
+.textHUD {
+    text-shadow: 3.1px 3.1px -17.8px rgb(0, 0, 0);
+    -unity-text-outline-color: rgb(0, 0, 0);
+    -unity-text-outline-width: 1px;
+    font-size: 378%;
+    color: rgb(255, 255, 255);
+}

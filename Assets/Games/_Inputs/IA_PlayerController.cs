@@ -71,6 +71,24 @@ public partial class @IA_PlayerController: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Shoot"",
+                    ""type"": ""Button"",
+                    ""id"": ""a8cd5272-76fe-4cb0-988a-2bde12b5d426"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SwitchWeapon"",
+                    ""type"": ""Button"",
+                    ""id"": ""bbaaf836-694e-484b-b5b2-47095e051b4e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -172,6 +190,28 @@ public partial class @IA_PlayerController: IInputActionCollection2, IDisposable
                     ""action"": ""ForwardBoost"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""29ce5322-d90e-4dcb-be02-1870dd5f6bf2"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Shoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""56a6335e-f353-41c5-b730-0f4f12935978"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -185,6 +225,8 @@ public partial class @IA_PlayerController: IInputActionCollection2, IDisposable
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_FlyDown = m_Player.FindAction("FlyDown", throwIfNotFound: true);
         m_Player_ForwardBoost = m_Player.FindAction("ForwardBoost", throwIfNotFound: true);
+        m_Player_Shoot = m_Player.FindAction("Shoot", throwIfNotFound: true);
+        m_Player_SwitchWeapon = m_Player.FindAction("SwitchWeapon", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -251,6 +293,8 @@ public partial class @IA_PlayerController: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_FlyDown;
     private readonly InputAction m_Player_ForwardBoost;
+    private readonly InputAction m_Player_Shoot;
+    private readonly InputAction m_Player_SwitchWeapon;
     public struct PlayerActions
     {
         private @IA_PlayerController m_Wrapper;
@@ -260,6 +304,8 @@ public partial class @IA_PlayerController: IInputActionCollection2, IDisposable
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @FlyDown => m_Wrapper.m_Player_FlyDown;
         public InputAction @ForwardBoost => m_Wrapper.m_Player_ForwardBoost;
+        public InputAction @Shoot => m_Wrapper.m_Player_Shoot;
+        public InputAction @SwitchWeapon => m_Wrapper.m_Player_SwitchWeapon;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -284,6 +330,12 @@ public partial class @IA_PlayerController: IInputActionCollection2, IDisposable
             @ForwardBoost.started += instance.OnForwardBoost;
             @ForwardBoost.performed += instance.OnForwardBoost;
             @ForwardBoost.canceled += instance.OnForwardBoost;
+            @Shoot.started += instance.OnShoot;
+            @Shoot.performed += instance.OnShoot;
+            @Shoot.canceled += instance.OnShoot;
+            @SwitchWeapon.started += instance.OnSwitchWeapon;
+            @SwitchWeapon.performed += instance.OnSwitchWeapon;
+            @SwitchWeapon.canceled += instance.OnSwitchWeapon;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -303,6 +355,12 @@ public partial class @IA_PlayerController: IInputActionCollection2, IDisposable
             @ForwardBoost.started -= instance.OnForwardBoost;
             @ForwardBoost.performed -= instance.OnForwardBoost;
             @ForwardBoost.canceled -= instance.OnForwardBoost;
+            @Shoot.started -= instance.OnShoot;
+            @Shoot.performed -= instance.OnShoot;
+            @Shoot.canceled -= instance.OnShoot;
+            @SwitchWeapon.started -= instance.OnSwitchWeapon;
+            @SwitchWeapon.performed -= instance.OnSwitchWeapon;
+            @SwitchWeapon.canceled -= instance.OnSwitchWeapon;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -327,5 +385,7 @@ public partial class @IA_PlayerController: IInputActionCollection2, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnFlyDown(InputAction.CallbackContext context);
         void OnForwardBoost(InputAction.CallbackContext context);
+        void OnShoot(InputAction.CallbackContext context);
+        void OnSwitchWeapon(InputAction.CallbackContext context);
     }
 }
