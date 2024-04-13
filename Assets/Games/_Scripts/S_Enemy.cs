@@ -10,6 +10,8 @@ public class S_Enemy : MonoBehaviour
 
     [SerializeField] private int _lifePoints = 50;
 
+    [SerializeField] private GameObject _deathVFX;
+
     void Start()
     {
         _navMeshAgent = GetComponent<NavMeshAgent>();
@@ -40,5 +42,7 @@ public class S_Enemy : MonoBehaviour
         Destroy(gameObject);
 
         // Ajout d'une explosion à la mort de l'ennemi
+        GameObject bloodExplosion = Instantiate(_deathVFX, transform.position, Quaternion.identity);
+        Destroy(bloodExplosion, 5f);
     }
 }
