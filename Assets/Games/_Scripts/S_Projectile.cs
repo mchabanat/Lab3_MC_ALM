@@ -49,7 +49,6 @@ public class S_Projectile : MonoBehaviour
             if (numberOfBounce > 0)
             {
                 numberOfBounce--;
-                Debug.Log("Bounce: " + numberOfBounce);
             }
             else
             {
@@ -58,8 +57,15 @@ public class S_Projectile : MonoBehaviour
         }
         else
         {
+            Debug.Log("Collision with " + collision.gameObject.name);
+            if(collision.gameObject.tag == "Ennemy")
+            {
+                collision.gameObject.GetComponent<S_Enemy>().TakeDamage(10);
+            }
             Destroy(gameObject);
         }
+
+
     }
 
     public void setExplosive(bool explosive)
