@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEngine.SceneManagement;
 
 public class S_Menu : MonoBehaviour
 {
@@ -69,7 +70,7 @@ public class S_Menu : MonoBehaviour
 
     private void play()
     {
-        Debug.Log("Play");
+        SceneManager.LoadScene("LVL_MainMap");
     }
     private void settings()
     {

@@ -57,7 +57,7 @@ public class S_Projectile : MonoBehaviour
         }
         else
         {
-            Debug.Log("Collision with " + collision.gameObject.name);
+            
             if(collision.gameObject.tag == "Ennemy")
             {
                 collision.gameObject.GetComponent<S_Enemy>().TakeDamage(10);

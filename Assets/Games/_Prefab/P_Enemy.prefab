@@ -171,3 +171,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _lifePoints: 15
   _deathVFX: {fileID: 2572291212952795115, guid: 55d7a21d646706a4c89cfdd060b2ea1b, type: 3}
+  _bonusAmmo: {fileID: 5450768599803474302, guid: a0642ca8c2df1934fabb1a40e6b8084a, type: 3}

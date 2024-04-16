@@ -8,9 +8,11 @@ public class S_Bonus : MonoBehaviour
 
     [SerializeField] private int ammo = 10;
 
+    [SerializeField] private float timeBeforeDestroy = 10f;
+
     void Start()
     {
-
+        Destroy(gameObject, timeBeforeDestroy);
     }
 
     // Update is called once per frame

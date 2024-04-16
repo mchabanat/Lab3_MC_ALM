@@ -10,11 +10,17 @@ public class S_Explosion : MonoBehaviour
     {
         duration = explosion.main.duration;
         Destroy(gameObject, duration);
-
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Explosion hit: " + other.name);
+        if (other.tag == "Ennemy")
+        {
+            other.GetComponent<S_Enemy>().TakeDamage(50);
+        }
+        if (other.tag == "Player")
+        {
+            other.GetComponent<S_Player>().takeDamage(50);
+        }
     }
 }
