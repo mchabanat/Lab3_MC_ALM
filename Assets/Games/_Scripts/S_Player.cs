@@ -29,6 +29,7 @@ public class S_Player : MonoBehaviour
 
     void Update()
     {
+        Debug.Log(gameObject.GetComponent<Rigidbody>().mass);
     }
 
     private void Die()
