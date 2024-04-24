@@ -1,0 +1,89 @@
+.button {
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    -unity-font: url('project://database/Assets/UnityDefaultRuntimeTheme.tss?fileID=2230732570650464555&guid=e4475e1b5dd45154ab202936b09a3ede&type=3#NotInter-Regular');
+    -unity-font-style: bold;
+    letter-spacing: 85px;
+    background-color: rgba(0, 0, 0, 0);
+    border-left-width: 2px;
+    border-right-width: 2px;
+    border-top-width: 2px;
+    border-bottom-width: 2px;
+    border-left-color: rgb(0, 0, 0);
+    border-right-color: rgb(0, 0, 0);
+    border-top-color: rgb(0, 0, 0);
+    border-bottom-color: rgb(0, 0, 0);
+    font-size: 30px;
+    transition-property: width;
+    transition-duration: 0.5s;
+    transition-timing-function: ease-in-out;
+}
+
+.button:hover {
+    width: 90%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    -unity-font: url('project://database/Assets/UnityDefaultRuntimeTheme.tss?fileID=2230732570650464555&guid=e4475e1b5dd45154ab202936b09a3ede&type=3#NotInter-Regular');
+    -unity-font-style: bold;
+    letter-spacing: 85px;
+    background-color: rgba(0, 0, 0, 0);
+    border-left-width: 2px;
+    border-right-width: 2px;
+    border-top-width: 2px;
+    border-bottom-width: 2px;
+    border-left-color: rgb(0, 0, 0);
+    border-right-color: rgb(0, 0, 0);
+    border-top-color: rgb(0, 0, 0);
+    border-bottom-color: rgb(0, 0, 0);
+    font-size: 30px;
+    transition-property: width;
+    transition-duration: 0.5s;
+    transition-timing-function: ease-in-out;
+}
+
+.buttonSettings {
+    width: 30%;
+    height: 50%;
+    -unity-text-align: middle-center;
+    font-size: 26px;
+    -unity-font-style: normal;
+    letter-spacing: 2px;
+    background-color: rgba(255, 255, 255, 0.15);
+    transition-property: all, background-color;
+    transition-duration: 0s, 0.5s;
+    transition-timing-function: ease, ease-in-out;
+    transition-delay: 0s, 0s;
+}
+
+.buttonSettings:hover {
+    width: 30%;
+    height: 50%;
+    -unity-text-align: middle-center;
+    font-size: 26px;
+    -unity-font-style: normal;
+    letter-spacing: 2px;
+    background-color: rgba(255, 255, 255, 0.82);
+    transition-property: all, background-color;
+    transition-duration: 0s, 0.5s;
+    transition-timing-function: ease, ease-in-out;
+    transition-delay: 0s, 0s;
+}
+
+.textHUD {
+    text-shadow: 3.1px 3.1px -17.8px rgb(0, 0, 0);
+    -unity-text-outline-color: rgb(0, 0, 0);
+    -unity-text-outline-width: 1px;
+    font-size: 378%;
+    color: rgb(255, 255, 255);
+    width: 33%;
+    -unity-text-align: upper-center;
+}
