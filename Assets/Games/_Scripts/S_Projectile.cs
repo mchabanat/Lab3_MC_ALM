@@ -55,13 +55,12 @@ public class S_Projectile : MonoBehaviour
                 Destroy(gameObject);
             }
         }
-        else
+        if (collision.gameObject.tag == "Ennemy")
         {
-            
-            if(collision.gameObject.tag == "Ennemy")
-            {
-                collision.gameObject.GetComponent<S_Enemy>().TakeDamage(10);
-            }
+            collision.gameObject.GetComponent<S_Enemy>().TakeDamage(10);
+        }
+        if(!isBouncy)
+        {
             Destroy(gameObject);
         }
 

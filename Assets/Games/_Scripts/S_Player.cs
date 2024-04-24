@@ -33,7 +33,7 @@ public class S_Player : MonoBehaviour
 
     private void Die()
     {
-        Debug.Log("Player died");
+        _HUD.GetComponent<S_HUD>().GameOver();
     }
 
     public void changeGun()

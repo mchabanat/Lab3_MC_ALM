@@ -50,4 +50,12 @@ public class S_Enemy : MonoBehaviour
 
         Destroy(gameObject);
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            collision.gameObject.GetComponent<S_Player>().takeDamage(10);
+        }
+    }
 }

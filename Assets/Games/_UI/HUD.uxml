@@ -10,4 +10,18 @@
             <ui:Label tabindex="-1" text="Ammo : 100" display-tooltip-when-elided="true" name="Ammo" class="textHUD" />
         </ui:VisualElement>
     </ui:VisualElement>
+    <ui:VisualElement name="pause" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); position: absolute; width: 100%; height: 100%; justify-content: center; align-self: auto; align-items: center;">
+        <ui:VisualElement name="Menu" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0.5); width: 70%; height: 500px; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; margin-left: 50px; margin-right: 50px; margin-top: 50px; margin-bottom: 50px; border-top-left-radius: 23px; border-bottom-left-radius: 23px; border-top-right-radius: 23px; border-bottom-right-radius: 23px;">
+            <ui:Label tabindex="-1" text="Pause" display-tooltip-when-elided="true" style="-unity-text-align: upper-center; font-size: 57px; -unity-font: url(&apos;project://database/Assets/TextMesh%20Pro/Fonts/LiberationSans.ttf?fileID=12800000&amp;guid=e3265ab4bf004d28a9537516768c1c75&amp;type=3#LiberationSans&apos;); -unity-font-style: bold; color: rgb(255, 255, 255); margin-bottom: 80px;" />
+            <ui:Button text="Resume" display-tooltip-when-elided="true" name="buttonResume" />
+            <ui:Button text="Menu" display-tooltip-when-elided="true" name="buttonMenu" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:VisualElement name="mort" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); position: absolute; width: 100%; height: 100%; justify-content: center; align-self: auto; align-items: center;">
+        <ui:VisualElement name="Menu" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0.5); width: 70%; height: 500px; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; margin-left: 50px; margin-right: 50px; margin-top: 50px; margin-bottom: 50px; border-top-left-radius: 23px; border-bottom-left-radius: 23px; border-top-right-radius: 23px; border-bottom-right-radius: 23px;">
+            <ui:Label tabindex="-1" text="Game Over" display-tooltip-when-elided="true" style="-unity-text-align: upper-center; font-size: 57px; -unity-font: url(&apos;project://database/Assets/TextMesh%20Pro/Fonts/LiberationSans.ttf?fileID=12800000&amp;guid=e3265ab4bf004d28a9537516768c1c75&amp;type=3#LiberationSans&apos;); -unity-font-style: bold; color: rgb(255, 255, 255); margin-bottom: 80px;" />
+            <ui:Button text="Retry" display-tooltip-when-elided="true" name="buttonRetry" />
+            <ui:Button text="Menu" display-tooltip-when-elided="true" name="buttonMenuGO" />
+        </ui:VisualElement>
+    </ui:VisualElement>
 </ui:UXML>
