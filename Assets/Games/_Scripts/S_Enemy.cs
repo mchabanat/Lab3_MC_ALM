@@ -12,6 +12,8 @@ public class S_Enemy : MonoBehaviour
 
     [SerializeField] private GameObject _deathVFX;
 
+    [SerializeField] private GameObject _bonusAmmo;
+
     void Start()
     {
         _navMeshAgent = GetComponent<NavMeshAgent>();
@@ -39,10 +41,21 @@ public class S_Enemy : MonoBehaviour
 
     public void Die()
     {
-        Destroy(gameObject);
-
         // Ajout d'une explosion à la mort de l'ennemi
         GameObject bloodExplosion = Instantiate(_deathVFX, transform.position, Quaternion.identity);
-        Destroy(bloodExplosion, 5f);
+        Destroy(bloodExplosion, 2f);
+
+        //Ajout d'un bonus de munitions à la mort de l'ennemi
+        GameObject ammoBonus = Instantiate(_bonusAmmo, new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), Quaternion.identity);
+
+        Destroy(gameObject);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            collision.gameObject.GetComponent<S_Player>().takeDamage(10);
+        }
     }
 }

@@ -13,7 +13,7 @@ public class S_Player : MonoBehaviour
 
     [SerializeField] private GameObject _gunTransform;
 
-    [SerializeField] private int ammo = 32;
+    [SerializeField] private int _ammo = 32;
 
     [SerializeField] private GameObject _HUD;
 
@@ -23,7 +23,7 @@ public class S_Player : MonoBehaviour
     {
         _activeGunIndex = 0;
         _currentHealth = _maxHealth;
-        _HUD.GetComponent<S_HUD>().UpdateAmmo(ammo);
+        _HUD.GetComponent<S_HUD>().UpdateAmmo(_ammo);
         _HUD.GetComponent<S_HUD>().UpdateHealth(_currentHealth);
     }
 
@@ -34,7 +34,7 @@ public class S_Player : MonoBehaviour
 
     private void Die()
     {
-        Debug.Log("Player died");
+        _HUD.GetComponent<S_HUD>().GameOver();
     }
 
     public void changeGun()
@@ -51,7 +51,7 @@ public class S_Player : MonoBehaviour
 
     public void Shoot(GameObject cam)
     {
-        if (ammo <= 0)
+        if (_ammo <= 0)
         {
             return;
         }
@@ -79,15 +79,15 @@ public class S_Player : MonoBehaviour
 
             _activeGun.GetComponent<S_Guns>().gunFire.Play();
 
-            ammo--;
-            _HUD.GetComponent<S_HUD>().UpdateAmmo(ammo);
+            _ammo--;
+            _HUD.GetComponent<S_HUD>().UpdateAmmo(_ammo);
         }
     }
 
     public void AddAmmo(int ammo)
     {
-        this.ammo += ammo;
-        _HUD.GetComponent<S_HUD>().UpdateAmmo(ammo);
+        _ammo += ammo;
+        _HUD.GetComponent<S_HUD>().UpdateAmmo(_ammo);
     }
 
     public void takeDamage(int damage)

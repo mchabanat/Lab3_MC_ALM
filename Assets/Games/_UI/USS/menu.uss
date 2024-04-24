@@ -84,4 +84,6 @@
     -unity-text-outline-width: 1px;
     font-size: 378%;
     color: rgb(255, 255, 255);
+    width: 33%;
+    -unity-text-align: upper-center;
 }
