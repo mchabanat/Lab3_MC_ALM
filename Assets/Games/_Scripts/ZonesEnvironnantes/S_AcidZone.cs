@@ -5,14 +5,12 @@ using UnityEngine;
 
 public class S_AcidZone : MonoBehaviour
 {
-    private bool _isDamaging = false;
     private bool _playerDamageable = false;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
         {
-            _isDamaging = true;
             _playerDamageable = true;
         }
     }
@@ -35,16 +33,7 @@ public class S_AcidZone : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            Invoke("ResetIsDamaging", 5f);
             _playerDamageable = true;
-
-            // Prend des dégats toutes les secondes pendant 5 secondes après avoir quitté la zone
-            if (_playerDamageable)
-            {
-                TakeDamage(other.gameObject);
-                _playerDamageable = false;
-                Invoke("ResetDamageable", 1f);
-            }
         }
     }
 
@@ -57,10 +46,5 @@ public class S_AcidZone : MonoBehaviour
     private void ResetDamageable()
     {
         _playerDamageable = true;
-    }
-
-    private void ResetIsDamaging()
-    {
-        _isDamaging = false;
     }
 }
